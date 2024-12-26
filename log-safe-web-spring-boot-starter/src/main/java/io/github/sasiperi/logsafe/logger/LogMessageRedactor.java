@@ -55,7 +55,7 @@ public class LogMessageRedactor {
     private static final String REDACTED = "[REDACTED]";
     
     @Value("${logger.base-package-name}")
-    private String packageNameToScan;
+    private final String packageNameToScan;
     
     private final SensitiveDataConfig sensitiveData;
 
