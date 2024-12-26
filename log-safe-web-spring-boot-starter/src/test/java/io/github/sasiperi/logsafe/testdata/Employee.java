@@ -34,6 +34,10 @@ public class Employee {
 
     @Redact
     private String ssn;
+    
+    //to test no other java or other types are recursively processed (reflection) and only base-packe configured is searched for DTOs
+    private EmployeeType employeeType;
 
+    // to test nested elements redacted.
     private Address address;
 }
