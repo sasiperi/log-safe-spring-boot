@@ -1,0 +1,64 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.4.1</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>io.github.sasiperi </groupId>
+	<artifactId>log-safe-spring-boot</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>log-safe-spring-boot</name>
+	<description>Libraries to log request and response of Spring Web (Rest) APIs, with redacted data, configured as sensitive</description>
+	<packaging>pom</packaging>
+	<url/>
+	
+	<!-- ***************************** -->
+    <!-- * LICENSE (APACHE2) * -->
+    <!-- ***************************** -->
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    
+    <!-- ***************************** -->
+    <!-- * DEVELOPER && ORGANIZATION * -->
+    <!-- ***************************** -->
+	<developers>
+		<developer>
+			<id>sasiperi</id>
+			<name>Sasi Peri</name>
+			<organization>Fourth Quest</organization>
+			<organizationUrl>www.fourthquest.com</organizationUrl>
+		</developer>
+	</developers>
+	
+	<!-- ***************************** -->
+    <!-- * GIT (GITHUB) * -->
+    <!-- ***************************** -->
+	<scm>
+		<connection>scm:git:git://github.com/sasiperi/log-safe-spring-boot.git</connection>
+		<developerConnection>scm:git:git@github.com:sasiperi/log-safe-spring-boot.git</developerConnection>
+		<tag>HEAD</tag>
+		<url/>
+	</scm>
+	
+	<!-- ***************************** -->
+    <!-- * PROPERTIES               * -->
+    <!-- ***************************** -->
+	<properties>
+		<developers-developer>sasiperi</developers-developer>
+		<java.version>21</java.version>
+	</properties>
+	
+	<modules>
+		<module>log-safe-web-spring-boot-starter</module>
+		<module>log-safe-reactive-web-spring-boot-starter</module>
+		<module>samples/sample-spirngboot-rest-web</module>
+	</modules>
+</project>
