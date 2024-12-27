@@ -15,13 +15,16 @@
  */
 package io.github.sasiperi.logsafe;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.system.CapturedOutput;
+import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
@@ -33,6 +36,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
+@ExtendWith(OutputCaptureExtension.class)
 public class TestControllerIntegrationTest {
 	
 	@LocalServerPort
@@ -42,12 +46,13 @@ public class TestControllerIntegrationTest {
     private TestRestTemplate restTemplate;
     
     private static final String baseUrl = "http://localhost:{port}/test";
+    private static final String REDACTED = "[REDACTED]";
 
     @Test
-    void testGetEmployee() {
+    void testGetEmployee(CapturedOutput output) {
         // Arrange
         String url = baseUrl+"?apiKey=testApiKey&aSecret=testSecret";
-
+        
         // Act
         ResponseEntity<Employee> response = restTemplate.getForEntity(url, Employee.class, port);
 
@@ -55,15 +60,26 @@ public class TestControllerIntegrationTest {
         assertEquals(response.getStatusCode(),HttpStatus.OK);
         assertNotNull(response.getBody());
         assertEquals(response.getBody().getFirstName(),"John"); // Expected test data
+        
+        assertTrue(output.getOut().contains("REQUEST DATA:"),"Expected log output REQUEST DATA");
+        assertTrue(output.getOut().contains("\"host\":\"localhost:"),"Expected log output shoudl have remote host");
+        assertTrue(output.getOut().contains("/test"),"Expected log output shoudl have requested URI");
+        assertTrue(output.getOut().contains("application/json"),"Expected log output content type");
+        assertTrue(output.getOut().contains("\"aSecret\":\"[REDACTED]\""),"Expected secret query param to be redacted");
+        assertTrue(output.getOut().contains("\\\"firstName\\\":\\\"John\\\""),"Expected firstname John");
+        assertTrue(output.getOut().contains("\\\"employeeType\\\":\\\"FULL_TIME\\\""),"Expected employee type to be FULL_TIME");
+        assertTrue(output.getOut().contains("\\\"phoneNumber\\\":\\\"[REDACTED]\\\""),"Expected phone number to be redacted");
+        
     }
 
     @Test
-    void testCreateEmployee() {
+    void testCreateEmployee(CapturedOutput output) {
         // Arrange
         Employee newEmployee = Employee.builder()
                 .firstName("Jane")
                 .lastName("Doe")
                 .ssn("123-45-6789")
+                .employeeType(EmployeeType.PART_TIME)
                 .address(Address.builder()
                         .state("NY")
                         .city("New York")
@@ -73,6 +89,7 @@ public class TestControllerIntegrationTest {
         
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set(HttpHeaders.AUTHORIZATION, "Bearer tokenValue");
         HttpEntity<Employee> request = new HttpEntity<>(newEmployee, headers);
 
         // Act
@@ -82,9 +99,30 @@ public class TestControllerIntegrationTest {
         assertEquals(response.getStatusCode(),HttpStatus.OK);
         assertNotNull(response.getBody());
         assertEquals(response.getBody().getFirstName(),"Jane"); // Expected test data
+        
+        
+        assertTrue(output.getOut().contains("RESPONSE DATA:"),"Expected log output REQUEST DATA");
+        assertTrue(output.getOut().contains("\"host\":\"localhost:"),"Expected log output shoudl have remote host");
+        assertTrue(output.getOut().contains("/test"),"Expected log output shoudl have requested URI");
+        assertTrue(output.getOut().contains("application/json"),"Expected log output REQUEST DATA");
+        assertTrue(output.getOut().contains("\"authorization\":\"[REDACTED]\""),"Expected Auth header to be redacted");
+        assertTrue(output.getOut().contains("\\\"firstName\\\":\\\"Jane\\\""),"Expected firstname John");
+        assertTrue(output.getOut().contains("\\\"employeeType\\\":\\\"PART_TIME\\\""),"Expected employee type to be FULL_TIME");
+        assertTrue(output.getOut().contains("\\\"phoneNumber\\\":\\\"[REDACTED]\\\""),"Expected phone number to be redacted");
     }
 	
 	
-	
+    @Test
+    void testNodHandlerFound() {
+        // Arrange
+        String url = baseUrl+"/blah/?apiKey=testApiKey&aSecret=testSecret";
+        
+        // Act
+        ResponseEntity<Employee> response = restTemplate.getForEntity(url, Employee.class, port);
+
+        // Assert
+        assertEquals(response.getStatusCode(),HttpStatus.NOT_FOUND);
+        
+    }
 
 }
