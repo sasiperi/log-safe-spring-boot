@@ -57,8 +57,8 @@ public class HttpRequestResponseLogFilter extends OncePerRequestFilter {
   public HttpRequestResponseLogFilter(
           @Qualifier("requestMappingHandlerMapping") RequestMappingHandlerMapping handlerMapping,
           HttpLogFilterHelper logFilterHelper,
-          @Value("${logger.in.log-request}") boolean logRequest,
-          @Value("${logger.in.log-response}") boolean logResponse) {
+          @Value("${logsafe.logger.in.log-request:true}") boolean logRequest,
+          @Value("${logsafe.logger.in.log-response:false}") boolean logResponse) {
       this.handlerMapping = handlerMapping;
       this.logFilterHelper = logFilterHelper;
       this.logRequest = logRequest;

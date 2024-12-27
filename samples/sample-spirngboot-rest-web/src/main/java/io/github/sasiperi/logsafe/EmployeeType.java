@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package io.github.sasiperi.logsafe.testdata;
+package io.github.sasiperi.logsafe;
 
 public enum EmployeeType {
     FULL_TIME,

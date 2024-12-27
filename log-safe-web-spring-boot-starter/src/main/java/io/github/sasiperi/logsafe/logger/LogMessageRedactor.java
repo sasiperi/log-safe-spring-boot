@@ -46,18 +46,23 @@ import lombok.extern.slf4j.Slf4j;
  */
 
 @Component
-@RequiredArgsConstructor
 @AutoConfiguration
 @Slf4j
 public class LogMessageRedactor {
     
     private static final ObjectMapper objectMapper = new ObjectMapper();
     private static final String REDACTED = "[REDACTED]";
-    
-    @Value("${logger.base-package-name}")
+
     private final String packageNameToScan;
-    
     private final SensitiveDataConfig sensitiveData;
+
+    // Constructor for dependency injection
+	public LogMessageRedactor(@Value("${logsafe.logger.base-package-name}") String packageNameToScan,
+			SensitiveDataConfig sensitiveData) {
+
+		this.packageNameToScan = packageNameToScan;
+		this.sensitiveData = sensitiveData;
+	}
 
     public HttpLogMessage redactLogMessage(HttpLogMessage httpLogMessage) throws RedactionException {
        

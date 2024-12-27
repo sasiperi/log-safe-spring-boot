@@ -24,12 +24,12 @@ import org.springframework.context.annotation.Configuration;
 import lombok.Data;
 
 @Configuration
-@ConfigurationProperties(prefix = "sensitive")
+@ConfigurationProperties(prefix = "logsafe.sensitive")
 @Data
 @AutoConfiguration
 public class SensitiveDataConfig {
-    private List<String> headers;
-    private List<String> queryParams;
-    private List<String> requestAttributes;
+    private List<String> headers = List.of("Authorization","x-api-key");
+    private List<String> queryParams = List.of("password","apiKey","token");
+    private List<String> requestAttributes = List.of("csrfToken","refreshToken");;
    
 }

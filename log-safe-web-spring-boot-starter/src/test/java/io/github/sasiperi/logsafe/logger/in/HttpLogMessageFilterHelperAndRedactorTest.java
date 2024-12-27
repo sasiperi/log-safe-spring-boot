@@ -15,8 +15,8 @@
  */
 package io.github.sasiperi.logsafe.logger.in;
 
-import static io.github.sasiperi.logsafe.testdata.EmployeeType.FULL_TIME;
-import static io.github.sasiperi.logsafe.testdata.EmployeeType.PART_TIME;
+import static io.github.sasiperi.logsafe.testdto.EmployeeType.FULL_TIME;
+import static io.github.sasiperi.logsafe.testdto.EmployeeType.PART_TIME;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -59,8 +59,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.sasiperi.logsafe.config.SensitiveDataConfig;
 import io.github.sasiperi.logsafe.logger.HttpLogMessage;
 import io.github.sasiperi.logsafe.logger.LogMessageRedactor;
-import io.github.sasiperi.logsafe.testdata.Address;
-import io.github.sasiperi.logsafe.testdata.Employee;
+import io.github.sasiperi.logsafe.testdto.Address;
+import io.github.sasiperi.logsafe.testdto.Employee;
 
 
 @ExtendWith({MockitoExtension.class, OutputCaptureExtension.class})

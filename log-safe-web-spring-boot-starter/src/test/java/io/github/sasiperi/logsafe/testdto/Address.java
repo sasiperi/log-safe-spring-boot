@@ -13,18 +13,16 @@
  * limitations under the License.
  * 
  */
-package io.github.sasiperi.logsafe.testdata;
+package io.github.sasiperi.logsafe.testdto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import io.github.sasiperi.logsafe.logger.Redact;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @AllArgsConstructor
 @NoArgsConstructor

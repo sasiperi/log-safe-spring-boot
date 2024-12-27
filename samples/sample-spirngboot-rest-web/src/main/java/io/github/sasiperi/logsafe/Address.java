@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package io.github.sasiperi.logsafe.testdata;
+package io.github.sasiperi.logsafe;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -28,16 +28,10 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Employee {
-    private String firstName;
-    private String lastName;
+public class Address {
+	private String state;
+	private String city;
 
     @Redact
-    private String ssn;
-    
-    //to test no other java or other types are recursively processed (reflection) and only base-packe configured is searched for DTOs
-    private EmployeeType employeeType;
-
-    // to test nested elements redacted.
-    private Address address;
+    private String phoneNumber;
 }
