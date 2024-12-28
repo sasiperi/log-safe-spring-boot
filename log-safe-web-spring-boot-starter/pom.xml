@@ -43,7 +43,7 @@
 		<connection>scm:git:git://github.com/sasiperi/log-safe-spring-boot.git</connection>
 		<developerConnection>scm:git:git@github.com:sasiperi/log-safe-spring-boot.git</developerConnection>
 		<tag>HEAD</tag>
-		<url></url>
+		<url />
 	</scm>
 	
 	<!-- ***************************** -->
@@ -95,6 +95,18 @@
 					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
+			<!--<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
@@ -194,20 +206,6 @@
 	    </repository>
     
     </distributionManagement>	
-    <dependencyManagement>
-    <dependencies>
-        <dependency>
-            <groupId>org.apache.maven.scm</groupId>
-            <artifactId>maven-scm-provider-gitexe</artifactId>
-            <version>2.1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven.scm</groupId>
-            <artifactId>maven-scm-api</artifactId>
-            <version>2.1.0</version>
-        </dependency>
-    </dependencies>
-</dependencyManagement>
     
     
   <profiles>
@@ -298,19 +296,19 @@
 						<mavenExecutorId>forked-path</mavenExecutorId>
 						<arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
 					</configuration>
-					<!--<dependencies>
+					<dependencies>
 						<dependency>
 							<groupId>org.apache.maven.scm</groupId>
 							<artifactId>maven-scm-provider-gitexe</artifactId>
-							<version>1.11.2</version>
+							<!--<version>1.11.2</version>-->
 						</dependency>
 						<dependency>
 					      <groupId>org.apache.maven.scm</groupId>
 					      <artifactId>maven-scm-api</artifactId>
-					      <version>1.11.2</version>
+					      <!--<version>1.11.2</version>-->
 					    </dependency>
 						
-					</dependencies>-->
+					</dependencies>
 				</plugin>
 	           
 	          	
