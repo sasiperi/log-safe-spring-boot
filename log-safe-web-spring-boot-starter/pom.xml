@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.4.1</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>io.github.sasiperi</groupId>
 	<artifactId>log-safe-web-spring-boot-starter</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>log-safe-web-spring-boot-starter</name>
 	<description>Library to log request and response of Spring Web MVC (Rest) APIs, with redacted data, configured as sensitive</description>
-	<url/>
+	<url />
 	<!-- ***************************** -->
     <!-- * LICENSE (APACHE2) * -->
     <!-- ***************************** -->
@@ -44,7 +43,7 @@
 		<connection>scm:git:git://github.com/sasiperi/log-safe-spring-boot.git</connection>
 		<developerConnection>scm:git:git@github.com:sasiperi/log-safe-spring-boot.git</developerConnection>
 		<tag>HEAD</tag>
-		<url/>
+		<url></url>
 	</scm>
 	
 	<!-- ***************************** -->
@@ -183,12 +182,12 @@
 					<dependency>
 						<groupId>org.apache.maven.scm</groupId>
 						<artifactId>maven-scm-provider-gitexe</artifactId>
-						<version>1.11.2</version>
+						<version>2.1.0</version>
 					</dependency>
 					<dependency>
 				      <groupId>org.apache.maven.scm</groupId>
 				      <artifactId>maven-scm-api</artifactId>
-				      <version>1.11.2</version>
+				      <version>2.1.0</version>
 				    </dependency>
 				</dependencies>-->
 			</plugin>
