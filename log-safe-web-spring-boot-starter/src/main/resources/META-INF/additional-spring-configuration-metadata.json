@@ -1,0 +1,77 @@
+{
+  "groups": [
+    {
+      "name": "sensitive",
+      "type": "io.github.sasiperi.logsafe.config.SensitiveDataConfig",
+      "sourceType": "io.github.sasiperi.logsafe.config.SensitiveDataConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "logsafe.sensitive.headers",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "io.github.sasiperi.logsafe.config.SensitiveDataConfig",
+      "description":"Comma seprated list of http header names, that require the value to be redacted, when logged",
+      "defaultValue":"Authorization,user-api-key"
+      
+    },
+    {
+      "name": "logsafe.sensitive.query-params",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "io.github.sasiperi.logsafe.config.SensitiveDataConfig",
+      "description":"Comma seprated list of http request query parameter names, that require the value to be redacted, when logged",
+      "defaultValue":"password,apiKey,token"
+    },
+    {
+      "name": "logsafe.sensitive.request-attributes",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "io.github.sasiperi.logsafe.config.SensitiveDataConfig",
+      "description":"Comma seprated list of http request attributes names, that require the value to be redacted, when logged",
+      "defaultValue":"csrfToken,refreshToken"
+    },
+    {
+      "name": "logsafe.logger.base-package-nam",
+      "type": "java.lang.String",
+      "description":"Your application base package name. This will be used to scan DTO/Pojo/Entity types, that needs serialize/deserialized, to process request/response types",
+      "defaultValue":" "
+    },
+    {
+      "name": "logsafe.logger.in.log-request",
+      "type": "java.lang.Boolean",
+      "description":"If true request data will be logged.",
+      "defaultValue":true
+    },
+    {
+      "name": "logsafe.logger.in.log-response",
+      "type": "java.lang.Boolean",
+      "description":"If true response data is logged",
+      "defaultValue":false
+    }
+    
+  ],
+  "hints": [
+  	{
+		"name": "logsafe.logger.in.log-request",
+		"values": [
+			{
+				"value": true
+			},
+			{
+				"value": false
+			}
+		]
+	},
+	{
+		"name": "logsafe.logger.in.log-response",
+		"values": [
+			{
+				"value": true
+			},
+			{
+				"value": false
+			}
+		]
+	}
+  
+  ]
+}
