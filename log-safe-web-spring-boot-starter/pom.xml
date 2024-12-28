@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>io.github.sasiperi</groupId>
 	<artifactId>log-safe-web-spring-boot-starter</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>log-safe-web-spring-boot-starter</name>
 	<description>Library to log request and response of Spring Web MVC (Rest) APIs, with redacted data, configured as sensitive</description>
 	<url />
@@ -43,7 +43,7 @@
 		<connection>scm:git:git://github.com/sasiperi/log-safe-spring-boot.git</connection>
 		<developerConnection>scm:git:git@github.com:sasiperi/log-safe-spring-boot.git</developerConnection>
 		<tag>r1</tag>
-		<url />
+		<url></url>
 	</scm>
 	
 	<!-- ***************************** -->
