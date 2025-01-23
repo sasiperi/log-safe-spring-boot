@@ -87,7 +87,7 @@ public class HttpRequestResponseLogFilter extends OncePerRequestFilter {
             // OR there is no request mapping (no controller/paths to handle) to process
             // OR the service does not have "default handler set to throw a default page/response" like I-Am-teapot or something.
             // If there is a handlerChain then proceed with logging.
-            if(handlerChain != null)
+            if(handlerChain != null && (logRequest || logResponse))
             {
               //Find the (endpoint) method that would be handling this http request.
               HandlerMethod handlerMethod = (HandlerMethod) handlerChain.getHandler();

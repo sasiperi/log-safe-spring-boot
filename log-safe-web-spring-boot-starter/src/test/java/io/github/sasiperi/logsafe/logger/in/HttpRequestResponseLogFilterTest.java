@@ -168,8 +168,7 @@ class HttpRequestResponseLogFilterTest {
         // Arrange
         filter = new HttpRequestResponseLogFilter(handlerMapping, logFilterHelper, false, false);
         when(handlerMapping.getHandler(request)).thenReturn(handlerChain);
-        when(handlerChain.getHandler()).thenReturn(handlerMethod);
-
+        
         // Act
         filter.doFilterInternal(request, response, filterChain);
 
