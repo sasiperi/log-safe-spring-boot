@@ -52,7 +52,7 @@
 		<dependency>
 			<groupId>io.github.sasiperi</groupId>
 			<artifactId>log-safe-web-spring-boot-starter</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>1.0.1</version>
 		</dependency>
 	</dependencies>
 

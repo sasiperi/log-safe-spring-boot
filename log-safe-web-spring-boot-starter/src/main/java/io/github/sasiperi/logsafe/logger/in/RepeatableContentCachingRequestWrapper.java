@@ -37,6 +37,11 @@ import jakarta.servlet.http.HttpServletRequest;
 public class RepeatableContentCachingRequestWrapper extends ContentCachingRequestWrapper {
   public RepeatableContentCachingRequestWrapper(HttpServletRequest request) throws IOException {
     super(request);
+    
+    // This is so RequestParameterMap, that's form-url-encoded, sent with POST will still be cached and would work.
+    // Otherwise with the way ContentCachingRequestWrapper implements for POSTs with mediatype x-form-url-encoded
+    // Parameter Map is not cached and not available for further reads (lost/empty).
+    super.getParameterMap();
     StreamUtils.drain(super.getInputStream());
   }
 

@@ -33,6 +33,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
@@ -125,4 +127,48 @@ public class TestControllerIntegrationTest {
         
     }
 
+    @Test
+    void testPostRequestParamMap(CapturedOutput output) {
+        // Arrange
+        String url = baseUrl+"/test-post-reqparam?apiKey=testApiKey&aSecret=testSecret";
+        
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set(HttpHeaders.AUTHORIZATION, "Bearer tokenValue");
+        //HttpEntity<Employee> request = new HttpEntity<>(newEmployee, headers);
+
+        // Act
+        Integer response = restTemplate.postForObject(url, null, Integer.class, port);
+        
+       // Assert
+        assertEquals(response,5);
+        assertTrue(output.getOut().contains("Params posted [apiKey, aSecret] - [testApiKey, testSecret]"));
+        assertTrue(output.getOut().contains("\"aSecret\":\"[REDACTED]\""),"Expected secret query param to be redacted");
+
+        
+    }
+    
+    @Test
+    void tesPosttRequestParamMapWithXFormUrlEnc(CapturedOutput output) {
+        // Arrange
+        String url = baseUrl+"/test-post-reqparam-urlencoded";
+        
+        MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+        body.add("apiKey", "testApiKey");
+        body.add("aSecret", "testSecret");
+        
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(body, headers);
+
+        // Act
+        ResponseEntity<Integer> response = restTemplate.postForEntity(url, requestEntity, Integer.class, port);
+
+        // Assert
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(6, response.getBody()); // Assuming the method returns the size of the map
+        assertTrue(output.getOut().contains("Params posted [apiKey, aSecret] - [testApiKey, testSecret]"));
+        assertTrue(output.getOut().contains("\"aSecret\":\"[REDACTED]\""),"Expected secret query param to be redacted");
+    }
 }
