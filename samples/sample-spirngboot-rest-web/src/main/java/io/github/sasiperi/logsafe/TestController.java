@@ -15,6 +15,9 @@
  */
 package io.github.sasiperi.logsafe;
 
+import java.util.Map;
+
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,6 +51,22 @@ public class TestController {
 		
 		log.info("Employee posted {}", employee );
 		return testService.createEmployee(employee);
+		
+	}
+	
+	@PostMapping("/test-post-reqparam")
+	public int postRequestParamMap(@RequestParam Map<String, String> reqParams) {
+		
+		log.info("Params posted {} - {}", reqParams.keySet(),reqParams.values() );
+		return 5;
+		
+	}
+	
+	@PostMapping(value = "/test-post-reqparam-urlencoded", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public int posttRequestParamMapWithXFormUrlEnc(@RequestParam Map<String, String> reqParams) {
+		
+		log.info("Params posted {} - {}", reqParams.keySet(),reqParams.values() );
+		return 6;
 		
 	}
 }
